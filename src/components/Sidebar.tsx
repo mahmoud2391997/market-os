@@ -15,12 +15,13 @@ import {
   Presentation,
   Globe,
   Warehouse,
+  Building2,
 } from "lucide-react"
 
 const navigation = [
   { name: "Dashboard", href: "/", icon: LayoutDashboard },
   { name: "POS System", href: "/pos", icon: ShoppingCart },
-  { name: "Product Management", href: "/products", icon: Package2 },
+  { name: "Menu Management", href: "/products", icon: Package2 },
   { name: "Warehouse View", href: "/warehouse", icon: Warehouse },
   { name: "Inventory", href: "/inventory", icon: Package },
   { name: "E-commerce", href: "/ecommerce", icon: Globe },
@@ -29,7 +30,8 @@ const navigation = [
   { name: "Finance", href: "/finance", icon: DollarSign },
   { name: "Reports", href: "/reports", icon: BarChart3 },
   { name: "Supply Chain", href: "/supply-chain", icon: Truck },
-  { name: "Product Analytics", href: "/product-analytics", icon: TrendingUp },
+  { name: "Menu Analytics", href: "/product-analytics", icon: TrendingUp },
+  { name: "Branches", href: "/branches", icon: Building2 },
   { name: "Presentation", href: "/presentation", icon: Presentation },
   { name: "Settings", href: "/settings", icon: Settings },
 ]
@@ -45,7 +47,7 @@ export function Sidebar() {
   return (
     <div className="flex flex-col w-64 bg-white shadow-lg">
       <div className="flex items-center justify-center h-16 px-4 bg-blue-600">
-        <h1 className="text-xl font-bold text-white">Market OS</h1>
+        <h1 className="text-xl font-bold text-white">Restaurant OS</h1>
       </div>
       <nav className="flex-1 px-2 py-4 space-y-1 overflow-y-auto">
         {navigation.map((item) => {

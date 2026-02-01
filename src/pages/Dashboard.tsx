@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { Separator } from "@/components/ui/separator"
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts"
-import { DollarSign, ShoppingCart, Users, TrendingUp, Clock, AlertTriangle } from "lucide-react"
+import { DollarSign, Users, TrendingUp, Clock, AlertTriangle, Utensils } from "lucide-react"
 
 const salesData = [
   { name: "Mon", sales: 4000, orders: 24 },
@@ -16,18 +16,18 @@ const salesData = [
 ]
 
 const categoryData = [
-  { name: "Groceries", value: 45, color: "#3b82f6" },
-  { name: "Electronics", value: 25, color: "#10b981" },
-  { name: "Clothing", value: 20, color: "#f59e0b" },
-  { name: "Home & Garden", value: 10, color: "#8b5cf6" },
+  { name: "Appetizers", value: 15, color: "#3b82f6" },
+  { name: "Main Course", value: 45, color: "#10b981" },
+  { name: "Desserts", value: 20, color: "#f59e0b" },
+  { name: "Beverages", value: 20, color: "#8b5cf6" },
 ]
 
 export function Dashboard() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Market Dashboard</h1>
-        <p className="text-gray-600">Welcome back! Here's what's happening at your market today.</p>
+        <h1 className="text-3xl font-bold text-gray-900">Restaurant Dashboard</h1>
+        <p className="text-gray-600">Welcome back! Here's what's happening at your restaurant today.</p>
       </div>
 
       {/* Key Metrics */}
@@ -47,8 +47,8 @@ export function Dashboard() {
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Orders Today</CardTitle>
-            <ShoppingCart className="h-4 w-4 text-muted-foreground" />
+            <CardTitle className="text-sm font-medium">Covers Today</CardTitle>
+            <Utensils className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">342</div>
@@ -73,7 +73,7 @@ export function Dashboard() {
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Avg Order Value</CardTitle>
+            <CardTitle className="text-sm font-medium">Avg Check Size</CardTitle>
             <TrendingUp className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -90,7 +90,7 @@ export function Dashboard() {
         <Card>
           <CardHeader>
             <CardTitle>Weekly Sales Overview</CardTitle>
-            <CardDescription>Revenue and order trends for the past week</CardDescription>
+            <CardDescription>Revenue and covers trends for the past week</CardDescription>
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
@@ -108,8 +108,8 @@ export function Dashboard() {
         {/* Category Performance */}
         <Card>
           <CardHeader>
-            <CardTitle>Sales by Category</CardTitle>
-            <CardDescription>Distribution of sales across product categories</CardDescription>
+            <CardTitle>Sales by Menu Category</CardTitle>
+            <CardDescription>Distribution of sales across menu categories</CardDescription>
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
@@ -138,7 +138,7 @@ export function Dashboard() {
         <Card className="lg:col-span-2">
           <CardHeader>
             <CardTitle>Recent Orders</CardTitle>
-            <CardDescription>Latest orders from your market</CardDescription>
+            <CardDescription>Latest orders from your restaurant</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
@@ -146,32 +146,32 @@ export function Dashboard() {
                 {
                   id: "#1234",
                   customer: "John Doe",
-                  items: "2x Apples, 1x Bread",
-                  total: "$12.50",
+                  items: "1x Caesar Salad, 2x Coffee",
+                  total: "$24.98",
                   status: "completed",
                   time: "2 min ago",
                 },
                 {
                   id: "#1235",
                   customer: "Jane Smith",
-                  items: "1x Laptop, 2x Cables",
-                  total: "$1,248.75",
+                  items: "1x Grilled Chicken, 1x Chocolate Cake",
+                  total: "$27.98",
                   status: "preparing",
                   time: "5 min ago",
                 },
                 {
                   id: "#1236",
                   customer: "Mike Johnson",
-                  items: "3x T-shirts, 1x Jeans",
-                  total: "$89.25",
+                  items: "2x Tomato Soup, 1x Grilled Salmon",
+                  total: "$56.97",
                   status: "pending",
                   time: "8 min ago",
                 },
                 {
                   id: "#1237",
                   customer: "Sarah Wilson",
-                  items: "1x Garden Tools, 1x Fertilizer",
-                  total: "$45.00",
+                  items: "1x Appetizer Platter, 2x Beverages",
+                  total: "$18.99",
                   status: "completed",
                   time: "12 min ago",
                 },
@@ -186,7 +186,9 @@ export function Dashboard() {
                             ? "default"
                             : order.status === "preparing"
                               ? "secondary"
-                              : "outline"
+                              : order.status === "pending"
+                                ? "outline"
+                                : "destructive"
                         }
                       >
                         {order.status}
@@ -214,7 +216,7 @@ export function Dashboard() {
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2">
                 <Clock className="h-4 w-4 text-blue-500" />
-                <span className="text-sm">Avg Processing Time</span>
+                <span className="text-sm">Avg Kitchen Prep Time</span>
               </div>
               <span className="font-medium">3 min</span>
             </div>
@@ -222,7 +224,7 @@ export function Dashboard() {
 
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
-                <span>Warehouse Efficiency</span>
+                <span>Kitchen Efficiency</span>
                 <span>94%</span>
               </div>
               <Progress value={94} className="h-2" />

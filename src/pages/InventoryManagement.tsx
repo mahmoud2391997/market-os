@@ -1,51 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useAppDispatch, useAppSelector } from '@/store/hooks'
-import {
-  // Actions
-  setSearch,
-  setFilters,
-  clearFilters,
-  setSort,
-  setPage,
-  
-  // Thunks
-  fetchItems as fetchInventoryItems,
-  fetchItemById as fetchInventoryItemById,
-  createItem as createInventoryItem,
-  updateItem as updateInventoryItem,
-  deleteItem as deleteInventoryItem,
-  fetchStockMovements,
-  createStockMovement,
-  fetchStockAdjustments,
-  createStockAdjustment,
-  fetchRecipes,
-  fetchRecipeById,
-  createRecipe,
-  updateRecipe,
-  deleteRecipe,
-  fetchPurchaseOrders,
-  createPurchaseOrder,
-  // updatePurchaseOrder,
-  // deletePurchaseOrder,
-  fetchInventoryLogs,
-  
-  // Selectors
-  selectPurchaseOrders,
-  selectInventoryLogs,
-  selectInventoryItems,
-  selectInventoryLoading,
-  selectInventoryError,
-  selectInventoryPagination,
-  selectInventoryFilters,
-  selectInventorySearch,
-  selectInventorySort,
-  selectSelectedInventoryItem,
-  selectStockMovements,
-  selectStockAdjustments,
-  selectRecipes
-} from "@/store/slices/inventorySlice"
+import { useLocalInventory } from '@/hooks/useLocalData'
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -146,7 +102,6 @@ interface StockMovementPayload {
 type RecipeFormValues = z.infer<typeof recipeFormSchema>
 
 export default function InventoryManagement() {
-  const dispatch = useAppDispatch()
   const { toast } = useToast()
   
   const [activeTab, setActiveTab] = useState("all-items")
@@ -155,48 +110,41 @@ export default function InventoryManagement() {
   const [isMovementFormOpen, setIsMovementFormOpen] = useState(false)
   const [isRecipeFormOpen, setIsRecipeFormOpen] = useState(false)
   const [isPurchaseOrderFormOpen, setIsPurchaseOrderFormOpen] = useState(false)
-  const [editingItem, setEditingItem] = useState<InventoryItem | null>(null)
-  const [editingPurchaseOrder, setEditingPurchaseOrder] = useState<PurchaseOrder | null>(null)
-  const [selectedAdjustmentItem, setSelectedAdjustmentItem] = useState<InventoryItem | null>(null)
+  const [editingItem, setEditingItem] = useState<any>(null)
+  const [editingPurchaseOrder, setEditingPurchaseOrder] = useState<any>(null)
+  const [selectedAdjustmentItem, setSelectedAdjustmentItem] = useState<any>(null)
 
-  // Select state from Redux store
+  // Use local data instead of Redux
   const {
     items,
     loading,
     error,
-    stockMovements,
-    stockAdjustments,
-    recipes,
-    purchaseOrders,
-    inventoryLogs,
-    selectedItem,
-    menuItems,
-    menuCategories,
-    search,
-    filters,
-    sort,
-    page,
-    limit,
-    total,
-    totalPages
-  } = useAppSelector((state) => ({
-    items: selectInventoryItems(state),
-    loading: selectInventoryLoading(state),
-    error: selectInventoryError(state),
-    stockMovements: selectStockMovements(state),
-    stockAdjustments: selectStockAdjustments(state),
-    recipes: selectRecipes(state),
-    purchaseOrders: selectPurchaseOrders(state),
-    inventoryLogs: selectInventoryLogs(state),
-    selectedItem: selectSelectedInventoryItem(state),
-    search: selectInventorySearch(state),
-    filters: selectInventoryFilters(state),
-    sort: selectInventorySort(state),
-    menuItems: selectMenuItems(state),
-    menuCategories: selectCategories(state),
-    ...selectInventoryPagination(state)
-  }))
-console.log(recipes);
+    pagination,
+    fetchItems,
+    createItem,
+    updateItem,
+    deleteItem
+  } = useLocalInventory()
+
+  // Mock data for other features (not implemented in local data yet)
+  const stockMovements = []
+  const stockAdjustments = []
+  const recipes = []
+  const purchaseOrders = []
+  const inventoryLogs = []
+  const selectedItem = null
+  const menuItems = []
+  const menuCategories = []
+  const search = ""
+  const filters = {}
+  const sort = { field: "name", order: "asc" }
+  const page = pagination.page
+  const limit = pagination.limit
+  const total = pagination.total
+  const totalPages = pagination.totalPages
+
+  // Remove all the useEffect and handlers that use Redux
+  // We'll implement simple local versions
 
   // Recipe form selogtup
   const recipeForm = useForm<RecipeFormValues>({

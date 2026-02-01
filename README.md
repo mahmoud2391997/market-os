@@ -1,11 +1,11 @@
-# Market Operating System
+# Restaurant Operating System
 
-A comprehensive market management system built with React, TypeScript, and Vite.
+A comprehensive restaurant management system built with React, TypeScript, and Vite.
 
 ## Features
 
 - **POS System** - Complete point of sale with cart functionality
-- **Product Management** - Manage products, categories, and pricing
+- **Menu Management** - Manage menu items, categories, and pricing
 - **Order Hub** - Centralized order management from all channels
 - **Inventory Management** - Track stock levels and supplier management
 - **Customer Management** - Customer profiles and loyalty programs
@@ -37,7 +37,7 @@ A comprehensive market management system built with React, TypeScript, and Vite.
 1. Clone the repository
 ```bash
 git clone <repository-url>
-cd market-operating-system
+cd restaurant-operating-system
 ```
 
 2. Install dependencies
@@ -95,7 +95,7 @@ src/
 - Quick stats and alerts
 
 ### POS System
-- Interactive product catalog with categories
+- Interactive menu catalog with categories
 - Shopping cart functionality
 - Order calculation with tax
 - Multiple payment methods
